@@ -50,7 +50,6 @@ class S3PartitionWriter:
         lock = FileLock(self.manifest_path)
         try:
             with lock:
-                # 1) Load (or initialize) manifest safely
                 try:
                     with open(self.manifest_path, "r", encoding="utf-8") as f:
                         manifest = json.load(f)
@@ -67,9 +66,6 @@ class S3PartitionWriter:
         except json.JSONDecodeError:
             logging.warning("manifest.json was corrupted")
             
-        
-            
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
